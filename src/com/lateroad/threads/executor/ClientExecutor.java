@@ -10,20 +10,21 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class ClientExecutor {
-    public void execute(ClientList clients){
-        int poolSize = clients.size();
+    public void execute() {
+        final int poolSize = ClientList.size();
         ExecutorService es = Executors.newFixedThreadPool(poolSize);
         ArrayList<Future<String>> list = new ArrayList<>();
 
-        for (int i = 0; i < poolSize; ++i){
+        for (int i = 0; i < poolSize; ++i) {
             list.add(es.submit(new BaseCallable()));
         }
-        for(Future<String> future : list){
+        for (Future<String> future : list) {
             try {
                 System.out.println(future.get() + " result fixed");
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         }
+        es.shutdown();
     }
 }

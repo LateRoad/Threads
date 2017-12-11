@@ -13,7 +13,7 @@ public class TaxiPark {
     private static ReentrantLock lock = new ReentrantLock();
     private static AtomicBoolean instanceCreated = new AtomicBoolean(false);
     private static ArrayList<Taxi> freeTaxis = new ArrayList<>();
-    private static ArrayList<Taxi> busyTaxy = new ArrayList<>();
+    private static ArrayList<Taxi> busyTaxis = new ArrayList<>();
 
     private TaxiPark() {
         freeTaxis.add(new Taxi("1234-7"));
@@ -43,6 +43,7 @@ public class TaxiPark {
     public Taxi getTaxi(Client client) {
         lock.lock();
         if (freeTaxis.isEmpty()) {
+            lock.unlock();
             return null;
         }
         Location closest = new Location(Integer.MAX_VALUE, Integer.MAX_VALUE);
@@ -53,7 +54,7 @@ public class TaxiPark {
             }
         }
         freeTaxis.remove(closestTaxi);
-        busyTaxy.add(closestTaxi);
+        busyTaxis.add(closestTaxi);
         lock.unlock();
         return closestTaxi;
     }
@@ -62,5 +63,9 @@ public class TaxiPark {
         return Math.hypot(
                 client.getLocation().getX() - taxi.getLocation().getX(),
                 client.getLocation().getY() - taxi.getLocation().getY());
+    }
+
+    public double calculateTime(Client client, Taxi taxi) {
+        return calculatePath(client, taxi) * 100;
     }
 }

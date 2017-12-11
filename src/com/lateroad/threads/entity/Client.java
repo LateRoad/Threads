@@ -1,22 +1,28 @@
 package com.lateroad.threads.entity;
 
+import java.util.Objects;
+
 public class Client {
     private String name;
     private Location location;
+    private Location aim;
 
     public Client() {
         this.name = "Undefined client";
         this.location = new Location();
+        this.aim = new Location();
     }
 
     public Client(String name) {
         this.name = name;
         this.location = new Location();
+        this.aim = new Location();
     }
 
     public Client(String name, Location location) {
         this.name = name;
         this.location = location;
+        this.aim = new Location();
     }
 
     public String getName() {
@@ -35,22 +41,28 @@ public class Client {
         this.location = location;
     }
 
+    public Location getAim() {
+        return aim;
+    }
+
+    public void setAim(Location aim) {
+        this.aim = aim;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Client client = (Client) o;
-
-        if (!name.equals(client.name)) return false;
-        return location.equals(client.location);
+        return Objects.equals(name, client.name) &&
+                Objects.equals(location, client.location) &&
+                Objects.equals(aim, client.aim);
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + location.hashCode();
-        return result;
+
+        return Objects.hash(name, location, aim);
     }
 
     @Override
@@ -58,6 +70,7 @@ public class Client {
         return "Client{" +
                 "name='" + name + '\'' +
                 ", location=" + location +
+                ", aim=" + aim +
                 '}';
     }
 }
