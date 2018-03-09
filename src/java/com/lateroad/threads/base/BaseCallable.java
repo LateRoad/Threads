@@ -1,5 +1,6 @@
 package com.lateroad.threads.base;
 
+import com.lateroad.threads.collection.ClientList;
 import com.lateroad.threads.entity.Client;
 import com.lateroad.threads.entity.Location;
 import com.lateroad.threads.entity.Taxi;
@@ -37,7 +38,7 @@ public class BaseCallable implements Callable<String> {
             LOGGER.info(client.getName() + ". Taxi for is " + taxi.getNumber() + ". Its location is " + taxi.getLocation() + ".");
             result = "" + client + taxi;
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOGGER.error("Thread was interrupted.", e);
         }
         return result;
     }

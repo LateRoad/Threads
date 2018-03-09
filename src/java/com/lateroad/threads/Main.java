@@ -1,6 +1,6 @@
 package com.lateroad.threads;
 
-import com.lateroad.threads.base.ClientList;
+import com.lateroad.threads.collection.ClientList;
 import com.lateroad.threads.entity.Client;
 import com.lateroad.threads.executor.ClientExecutor;
 

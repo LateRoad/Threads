@@ -1,8 +1,9 @@
-package com.lateroad.threads.base;
+package com.lateroad.threads.collection;
 
 import com.lateroad.threads.entity.Client;
 
 import java.util.ArrayDeque;
+
 
 public class ClientList {
     private static ArrayDeque<Client> clients = new ArrayDeque<>();

@@ -1,7 +1,7 @@
 package com.lateroad.threads.executor;
 
 import com.lateroad.threads.base.BaseCallable;
-import com.lateroad.threads.base.ClientList;
+import com.lateroad.threads.collection.ClientList;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -20,7 +20,7 @@ public class ClientExecutor {
         }
         for (Future<String> future : list) {
             try {
-                System.out.println(future.get() + " result fixed");
+                System.out.println(future.get() + " fixed");
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }

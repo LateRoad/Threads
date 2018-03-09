@@ -14,6 +14,8 @@ public class TaxiPark {
     private static AtomicBoolean instanceCreated = new AtomicBoolean(false);
     private static ArrayList<Taxi> freeTaxis = new ArrayList<>();
     private static ArrayList<Taxi> busyTaxis = new ArrayList<>();
+    
+    private static final int TIME_MODIFIER = 100;
 
     private TaxiPark() {
         freeTaxis.add(new Taxi("1234-7"));
@@ -66,6 +68,6 @@ public class TaxiPark {
     }
 
     public double calculateTime(Client client, Taxi taxi) {
-        return calculatePath(client, taxi) * 100;
+        return calculatePath(client, taxi) * TIME_MODIFIER;
     }
 }
